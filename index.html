@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html ng-app="app" ng-controller="MainController">
 <head lang="en">
     <meta charset="UTF-8">
     <title>{{'TITLE' | translate}}</title>
@@ -8,32 +8,40 @@
     <link href="css/main.css" rel="stylesheet">
 </head>
 <body role="document">
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="navController as navCtrl">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">{{ 'HOME' | translate }}</a></li>
-                <li><a href="#/sensors">{{ 'SENSORS' | translate }}</a></li>
+            <ul class="nav navbar-nav {{$route.current.scope.activeTab}}">
+                <li><a href="#/home" class="home">{{ 'HOME' | translate }}</a></li>
+                <li><a href="#/sensors" class="sensors">{{ 'SENSORS' | translate }}</a></li>
+				<li><a href="#/measurements" class="measurements">{{ 'MEASUREMENT' | translate }}</a></li>
             </ul>
         </div>
-		<div id="languages">
+		<div id="languages" ng-controller="navController as navCtrl">
 			<img ng-src="img/flag_pl.gif" ng-class="navCtrl.plClass" ng-click="navCtrl.changeLanguagePl()" alt="{{ 'BUTTON_TEXT_DE' | translate}}"></img></li>
 			<img ng-src="img/flag_en.gif" ng-class="navCtrl.enClass" ng-click="navCtrl.changeLanguageEn()" alt="{{ 'BUTTON_TEXT_DE' | translate}}"></img></li>
 		</div>
     </div>
 </nav>
 
-<div id="content" class="container" role="main" ng-view></div>
+<div class="container">
+	<div id="content" class="view-frame" role="main" ng-view></div>
+</div>
 
 <script src="node_modules/angular/angular.js"></script>
 <script src="node_modules/angular-route/angular-route.js"></script>
 <script src="node_modules/angular-resource/angular-resource.js"></script>
 <script src="node_modules/angular-translate/dist/angular-translate.js"></script>
 <script src="node_modules/angular-translate/dist/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+<script src="node_modules/ng-table/ng-table.js"></script>
+<script src="node_modules/angular-animate/angular-animate.js"></script>
 
 <script src="js/app.js"></script>
+<script src="js/controllers/main.js"></script>
 <script src="js/controllers/sensors.js"></script>
 <script src="js/controllers/navigation.js"></script>
+<script src="js/controllers/measurements.js"></script>
+<script src="js/controllers/home.js"></script>
 <script src="js/services/sensor.js"></script>
 </body>
 </html>

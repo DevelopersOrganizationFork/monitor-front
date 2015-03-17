@@ -1,9 +1,9 @@
 angular.module('controllers').controller('navController', [
     '$scope', '$translate',
     function($scope, $translate) {
+		$scope.activeTab='home';
 		this.locale = "en_US";
 		this.plClass = "grayscale";
-		this.enClass = "";
 		
         this.changeLanguagePl = function() {
 			this.plClass = "";

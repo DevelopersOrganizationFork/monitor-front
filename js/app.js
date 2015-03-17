@@ -1,5 +1,6 @@
 var app = angular.module('app', [
-    'ngRoute', 'controllers', 'services', 'pascalprecht.translate', 'directives'
+    'ngRoute', 'controllers', 'services', 'pascalprecht.translate', 'directives',
+	'ngTable', 'ngAnimate'
 ]);
 
 app.config(['$routeProvider', function ($routeProvider) {
@@ -12,8 +13,16 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/sensors.html',
             controller: 'sensorsController'
         })
+		.when('/measurements', {
+			templateUrl: 'templates/measurements.html',
+			controller: 'measurementsController'
+		})
+		.when('/home', {
+			templateUrl: 'templates/measurements.html',
+			controller: 'homeController'
+		})
         .otherwise({
-            redirectTo: '/sensors'
+            redirectTo: '/home'
         });
     }]);
 
