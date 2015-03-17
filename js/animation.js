@@ -40,9 +40,10 @@
 			} else {
 				color = 'Blue';
 			}
-						
+				
+			var isBack = (Math.random() > 0.5) ? 'Back' : '';
 			point.classList.add('point' + color);
-			point.classList.add('point');
+			point.classList.add('point' + isBack);
 		
 			var pointBorder = document.createElement('div');
 			pointBorder.classList.add('pointBorder');
@@ -50,11 +51,7 @@
 			point.appendChild(pointBorder);
 		
 			var lineDiv = document.createElement('div');
-			if(Math.random() > 0.5) {
-				lineDiv.classList.add('line');
-			} else {
-				lineDiv.classList.add('lineBack');
-			}
+			lineDiv.classList.add('line'+isBack);
 			lineDiv.classList.add('line' + color);
 			lineDiv.classList.add('subline');
 			
