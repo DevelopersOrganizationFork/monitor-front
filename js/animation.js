@@ -3,7 +3,10 @@
 	function initFn2(element) {
 		var i;
 		var MAX_WIRES = 45;
-		
+		setTimeout(function() {
+			var login = document.getElementById('loginForm');
+			login.style.opacity = 1;
+		}, 400);
 		var backgroundDiv = document.getElementById('background');
 		
 		var maxWidth = backgroundDiv.offsetWidth;
@@ -265,3 +268,55 @@
 	
 	document.addEventListener('DOMContentLoaded', initFn2, false); 
 	
+	
+		window.onload = addListeners;
+
+	function addListeners(){
+		document.getElementById('loginForm').addEventListener('mousedown', mouseDown, false);
+		window.addEventListener('mouseup', mouseUp, false);
+		document.getElementById('loginInput').addEventListener('keyup', validLogin, false);
+		document.getElementById('passInput').addEventListener('keyup', validPass, false);
+	}
+	
+	function validLogin() {
+		if(this.value != '') {
+			this.previousElementSibling.style.opacity=1;
+		} else {
+			this.previousElementSibling.style.opacity=0;
+		}
+	}
+	
+	function validPass() {
+		if(this.value != '') {
+			this.previousElementSibling.style.opacity=1;
+		} else {
+			this.previousElementSibling.style.opacity=0;
+		}
+	}
+
+	function mouseUp()
+	{
+		window.removeEventListener('mousemove', divMove, true);
+	}
+
+	function mouseDown(e){
+	if(e.target.tagName == 'INPUT') {
+	return;
+	}
+		var div = document.getElementById('loginForm');
+		startTop = div.offsetTop;
+		startLeft = div.offsetLeft;
+	
+		startY = e.clientY;
+		startX = e.clientX;
+	    window.addEventListener('mousemove', divMove, true);
+	}
+
+	function divMove(e){
+		var div = document.getElementById('loginForm');
+		  div.style.position = 'absolute';
+		  div.style.top = startTop + (e.clientY-startY) + 'px';
+		  div.style.left = startLeft + (e.clientX-startX)+ 'px';
+		  div.style.right = 'initial';
+		  div.style.bottom = 'initial';
+	  }
