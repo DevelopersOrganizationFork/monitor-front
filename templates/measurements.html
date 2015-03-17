@@ -44,7 +44,8 @@ opacity:1;
 .pointBack.pointBlue, .pointBack.pointGreen{
 	width: 6px;
 	height: 6px;
-	margin-left: -3px;
+	margin-left: -1px;
+	margin-top: -1px;
 	border-radius: 50%;	
 	opacity: 0;
 	display: inline-block;
@@ -93,6 +94,8 @@ height: 10px;
 .pointBack>.pointBorder {
 	width:6px;
 	height:6px;
+	left: -1px;
+	top: -4px;
 }
 
 .lineTransition {
@@ -145,8 +148,8 @@ opacity: 0.5;
 	height: 3px;
 	float: left;
 	position: relative;
-transition: width 0.5s;
--webkit-transition: width 0.5s;
+transition: width 0.5s linear ;
+-webkit-transition: width 0.5s linear ;
 box-shadow: 0px 0px 11px rgb(200, 251, 255);
 }
 
@@ -154,8 +157,8 @@ box-shadow: 0px 0px 11px rgb(200, 251, 255);
 height: 2px;
 float: left;
 position: relative;
-transition: width 4s;
--webkit-transition: width 4s;
+transition: width 5s linear ;
+-webkit-transition: width 5s linear ;
 }
 
 .wire {

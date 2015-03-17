@@ -96,27 +96,52 @@
 				var subLineDiv = document.createElement('div');
 				
 				subLineDiv.style.bottom = bottom + 'px';
-				subLineDiv.classList.add('lineTransition');
+				//subLineDiv.classList.add('lineTransition');
 				
 				if(randRot < 0.3 && (!lineDiv.lastChild || !lineDiv.lastChild.classList.contains('rotatedDown'))) {
 					subWidth = 40;
-					subLineDiv.classList.add('rotatedUp');
-					bottom += 28;
-					subLineDiv.style.left = left + 'px';						
-					left -= 12;
-					maxHeight -= 30;
+					if(lineDiv.lastChild && lineDiv.lastChild.classList.contains('rotatedUp')) {
+						var lastWidth = parseInt(lineDiv.lastChild.style.width);
+						subWidth += lastWidth;
+						subLineDiv =lineDiv.lastChild;
+						bottom += 28;
+						left -= 12;
+						maxHeight -= 30;
+					} else {
+						subLineDiv.classList.add('rotatedUp');
+						bottom += 28;
+						subLineDiv.style.left = left + 'px';						
+						left -= 12;
+						maxHeight -= 30;
+					}
 				} else if(randRot > 0.7 && (!lineDiv.lastChild || !lineDiv.lastChild.classList.contains('rotatedUp'))) {
 					subWidth = 40;
-					bottom -= 28;
-					subLineDiv.style.left = left + 'px';										
-					left -= 12;
-					subLineDiv.classList.add('rotatedDown');
-					maxHeight -= 30;
+					if(lineDiv.lastChild && lineDiv.lastChild.classList.contains('rotatedDown')) {
+						var lastWidth = parseInt(lineDiv.lastChild.style.width);
+						subWidth += lastWidth;
+						subLineDiv =lineDiv.lastChild;
+						bottom -= 28;
+						left -= 12;
+						maxHeight -= 30;
+					} else {
+						bottom -= 28;
+						subLineDiv.style.left = left + 'px';										
+						left -= 12;
+						subLineDiv.classList.add('rotatedDown');
+						maxHeight -= 30;
+					}
+				} else if(lineDiv.lastChild && 
+						!lineDiv.lastChild.classList.contains('rotatedUp') &&
+						!lineDiv.lastChild.classList.contains('rotatedDown')) {
+					subWidth = Math.random()*subWidthMax * 0.8;
+					var lastWidth = parseInt(lineDiv.lastChild.style.width);
+					subWidth = subWidth < 20 ? 20+lastWidth : subWidth+lastWidth;
+					subLineDiv = lineDiv.lastChild;
 				} else {
 					subWidth = Math.random()*subWidthMax * 0.8;
 					subWidth = subWidth < 20 ? 20 : subWidth;
 					subLineDiv.style.left = left + 'px';	
-				}
+				} 
 
 				subWidthMax -= subWidth;
 				
