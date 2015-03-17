@@ -41,7 +41,7 @@ opacity:1;
 	transition: opacity 1s;
 }
 
-.pointBack.pointBlue, .point.pointGreen{
+.pointBack.pointBlue, .pointBack.pointGreen{
 	width: 6px;
 	height: 6px;
 	margin-left: -3px;
@@ -75,9 +75,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3fc4e9', end
 
 }
 
-pointBack.pointBorder, point.pointBorder {
-	width: 10px;
-	height: 10px;
+.pointBack>.pointBorder, .point>.pointBorder {
 	position: absolute;
 	left: -3px;
 	top: -3px;
@@ -87,7 +85,12 @@ pointBack.pointBorder, point.pointBorder {
 	  margin-left: -3px;
 }
 
-pointBack.pointBorder {
+.point>.pointBorder {
+width: 10px;
+height: 10px;
+}
+
+.pointBack>.pointBorder {
 	width:6px;
 	height:6px;
 }
