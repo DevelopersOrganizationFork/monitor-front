@@ -2,7 +2,7 @@
 	var nrOfWires = 0;
 	function initFn2(element) {
 		var i;
-		var MAX_WIRES = 50;
+		var MAX_WIRES = 45;
 		
 		var backgroundDiv = document.getElementById('background');
 		
@@ -203,7 +203,9 @@
 		
 		if(wire.children[1].firstChild !=null) {
 			var line = wire.children[1];
-			animateSubline(line, 0);
+			setTimeout(function() {
+				animateSubline(line, 0);
+			}, 200);
 		} else {
 			wire.style.opacity = 0;
 			setTimeout(function() {
