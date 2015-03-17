@@ -2,7 +2,7 @@
 	var nrOfWires = 0;
 	function initFn2(element) {
 		var i;
-		var MAX_WIRES = 70;
+		var MAX_WIRES = 50;
 		
 		var backgroundDiv = document.getElementById('background');
 		
@@ -159,7 +159,7 @@
 				if(i>=wires.length){
 					clearInterval(interval);
 				}			
-			},300);
+			},200);
 		}
 		
 	function prepareAnimateOne(wire) {
