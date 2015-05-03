@@ -37,6 +37,6 @@ app.config(['$translateProvider', function ($translateProvider) {
 angular.module('config', []).constant('config', {
     apiUrl: '#url-to-api#'
 });
-angular.module('controllers', []);
+angular.module('controllers', ['chart.js']);
 angular.module('directives', []);
 angular.module('services', ['ngResource', 'config']);
