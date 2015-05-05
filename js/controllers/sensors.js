@@ -18,12 +18,8 @@ angular.module('controllers').controller('sensorsController', [
 				total: sensors.length, // length of sensors
 				getData: function($defer, params) {
 					// use build-in angular filter
-					var filteredData = params.filter() ?
-                    $filter('filter')(sensors, params.filter()) :
-                    sensors;
-					var orderedData = params.sorting() ?
-                    $filter('orderBy')(filteredData, params.orderBy()) :
-                    sensors;
+					var filteredData = params.filter() ? $filter('filter')(sensors, params.filter()) : sensors;
+					var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : sensors;
 					
 					params.total(orderedData.length); // set total for recalc pagination
 					$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
