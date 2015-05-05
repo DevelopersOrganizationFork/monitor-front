@@ -26,6 +26,12 @@ app.config(['$routeProvider', function ($routeProvider) {
         });
     }]);
 
+app.config(['$httpProvider', function($httpProvider) {
+		$httpProvider.defaults.useXDomain = true;
+		delete $httpProvider.defaults.headers.common['X-Requested-With'];
+	}
+]);
+
 app.config(['$translateProvider', function ($translateProvider) {
 		$translateProvider.useStaticFilesLoader({
 			prefix: '/i18n/lang-',
@@ -35,7 +41,7 @@ app.config(['$translateProvider', function ($translateProvider) {
 	}]);
 
 angular.module('config', []).constant('config', {
-    apiUrl: '#url-to-api#'
+    apiUrl: 'http://localhost:18080/monitor-back/hosts/2/'
 });
 angular.module('controllers', ['chart.js']);
 angular.module('directives', []);

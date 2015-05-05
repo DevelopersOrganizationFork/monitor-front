@@ -1,21 +1,50 @@
 angular.module('controllers').controller('measurementsController', [
-		'$scope',
-		function ($scope) {
+		'$scope', '$timeout', '$q', 'Measurement',
+		function ($scope, $timeout, $q, Measurement) {
 			$scope.activeTab = 'measurements';
+			var measurements;
 
-			// mock data from sensor about memory
-			var labels = ['2015-05-03 14:20:00', '2015-05-03 14:20:10', '2015-05-03 14:20:20',
-				'2015-05-03 14:20:30', '2015-05-03 14:20:40'];
-			$scope.labels = labels.map(function(label) {
-				return formatDate(new Date(label));
-			});
-			$scope.series = ['Memory'];
-			$scope.data = [
-				[2566, 2700, 3156, 2050, 1900]
-			];
-			$scope.onClick = function (points, evt) {
-				console.log(points, evt);
-			};
+
+			function onDataFetchSuccess() {
+				var data;
+				$scope.labels = measurements.map(function(measurement) {
+					return formatDate(new Date(measurement.date));
+				});
+				$scope.series = ['CPU'];
+				data = measurements.map(function(measurement) {
+					return measurement.value;
+				});
+				$scope.data = [data];
+			}
+
+			getData()
+				.then(function() {
+					$timeout(function () {
+						onDataFetchSuccess();
+					}, 0);
+				});
+
+			function getData() {
+				var d = $q.defer();
+				//Measurement.query({type: 'CPU'}, function (data) {
+				//	measurements = data;
+				//    d.resolve();
+				//});
+
+				// MOCK MOCK
+				measurements = [{"date":1430828269469,"type":"CPU","value":52},
+					{"date":1430828269470,"type":"CPU","value":83},
+					{"date":1430828269471,"type":"CPU","value":26},
+					{"date":1430828269472,"type":"CPU","value":33},
+					{"date":1430828269473,"type":"CPU","value":18},
+					{"date":1430828269473,"type":"CPU","value":15},
+					{"date":1430828269474,"type":"CPU","value":59,"description":"complex memory"},
+					{"date":1430828269475,"type":"CPU","value":2,"description":"complex cpu"},
+					{"date":1430828269476,"type":"CPU","value":42,"description":"complex network"}];
+
+				d.resolve();
+				return d.promise;
+			}
 
 			function formatDate(date) {
 				var hours = date.getHours(),
@@ -25,7 +54,6 @@ angular.module('controllers').controller('measurementsController', [
 				seconds = seconds < 10 ? '0'+ seconds : seconds;
 				return hours +':'+ minutes +':'+ seconds;
 			}
-
 		}
 	]);
 
