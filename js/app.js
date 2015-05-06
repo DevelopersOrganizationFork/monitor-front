@@ -18,7 +18,7 @@ app.config(['$routeProvider', function ($routeProvider) {
 			controller: 'measurementsController'
 		})
 		.when('/home', {
-			templateUrl: 'templates/measurements.html',
+			templateUrl: 'templates/home.html',
 			controller: 'homeController'
 		})
         .otherwise({
@@ -41,7 +41,8 @@ app.config(['$translateProvider', function ($translateProvider) {
 	}]);
 
 angular.module('config', []).constant('config', {
-    apiUrl: 'http://localhost:18080/monitor-back/hosts/2/'
+    apiUrl: 'http://localhost:18080/monitor-back/fake/hosts/2/',
+    sensorsUrl: 'http://localhost:18080/monitor-back/hosts'
 });
 angular.module('controllers', ['chart.js']);
 angular.module('directives', []);

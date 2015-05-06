@@ -4,5 +4,6 @@
 	"SENSORS" : "Sensors",
 	"BUTTON_TEXT_PL":"Polish language",
 	"BUTTON_TEXT_EN":"English language",
-	"MEASUREMENT":"Measurements"
+	"MEASUREMENT":"Measurements",
+    "HOME_TITLE":"Choose monitor"
 }

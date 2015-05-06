@@ -36,13 +36,13 @@ angular.module('controllers').controller('sensorsController', [
 
         function getSensorsData() {
             var d = $q.defer();
-            //Sensor.query(function (data) {
-            //    sensors = data;
-            //    d.resolve();
-            //});
+            Sensor.query(function (data) {
+                sensors = data;
+                d.resolve();
+            });
 
             // mock data
-            sensors = [
+            /*sensors = [
                 {
                     id: 0,
                     cpuUsage: 10,
@@ -58,8 +58,7 @@ angular.module('controllers').controller('sensorsController', [
 					cpuUsage: 65,
 					ramUsage: 2900
 				}
-            ];
-            d.resolve();
+            ];*/
             return d.promise;
         }
     }
