@@ -1,166 +1,413 @@
+<link href="../css/login.css" rel="stylesheet">
+
 <style>
-	body {
-		margin:0;
+	#center, #center2 {
+		position: absolute;
+		top: -100px;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 500px;
+		width: 800px;
+		margin: auto;
 	}
-#background {
-background: rgb(36,41,61); /* Old browsers */
-background: -moz-radial-gradient(center, ellipse cover,  rgba(36,41,61,1) 0%, rgba(9,10,15,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(36,41,61,1)), color-stop(100%,rgba(9,10,15,1))); /* Chrome,Safari4+ */
-background: -webkit-radial-gradient(center, ellipse cover,  rgba(36,41,61,1) 0%,rgba(9,10,15,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-radial-gradient(center, ellipse cover,  rgba(36,41,61,1) 0%,rgba(9,10,15,1) 100%); /* Opera 12+ */
-background: -ms-radial-gradient(center, ellipse cover,  rgba(36,41,61,1) 0%,rgba(9,10,15,1) 100%); /* IE10+ */
-background: radial-gradient(ellipse at center,  rgba(36,41,61,1) 0%,rgba(9,10,15,1) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#24293d', endColorstr='#090a0f',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-
-	height: 100vh;
-	width: 100%;
-	overflow-y:hidden;
-}
-
-
-.pointTransition {
--webkit-transition: opacity 2s;
-transition: opacity 2s;
-opacity:0;
-}
-
-.pointTransition2 {
--webkit-transition: opacity 5s;
-transition: opacity 5s;
-opacity:1;
-}
-
-.point, .pointBlue, .pointGreen{
-
-	width: 10px;
-	height: 10px;
-	  margin-left: -3px;
-	border-radius: 50%;	
-	opacity: 0;
-	display: inline-block;
-	transition: opacity 1s;
-}
-.pointBlue {
-
-background: -moz-radial-gradient(center, ellipse cover,  rgba(63,196,233,1) 0%, rgba(63,196,233,0.81) 31%, rgba(63,196,233,0.61) 64%, rgba(63,196,233,0.39) 100%); /* FF3.6+ */
-background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(63,196,233,1)), color-stop(31%,rgba(63,196,233,0.81)), color-stop(64%,rgba(63,196,233,0.61)), color-stop(100%,rgba(63,196,233,0.39))); /* Chrome,Safari4+ */
-background: -webkit-radial-gradient(center, ellipse cover,  rgba(63,196,233,1) 0%,rgba(63,196,233,0.81) 31%,rgba(63,196,233,0.61) 64%,rgba(63,196,233,0.39) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-radial-gradient(center, ellipse cover,  rgba(63,196,233,1) 0%,rgba(63,196,233,0.81) 31%,rgba(63,196,233,0.61) 64%,rgba(63,196,233,0.39) 100%); /* Opera 12+ */
-background: -ms-radial-gradient(center, ellipse cover,  rgba(63,196,233,1) 0%,rgba(63,196,233,0.81) 31%,rgba(63,196,233,0.61) 64%,rgba(63,196,233,0.39) 100%); /* IE10+ */
-background: radial-gradient(ellipse at center,  rgba(63,196,233,1) 0%,rgba(63,196,233,0.81) 31%,rgba(63,196,233,0.61) 64%,rgba(63,196,233,0.39) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3fc4e9', endColorstr='#633fc4e9',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-
-}
-
-.pointGreen {
-	background: -moz-radial-gradient(center, ellipse cover,  rgba(180,227,145,1) 0%, rgba(97,196,25,0.74) 50%, rgba(180,227,145,0.48) 100%); /* FF3.6+ */
-	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(180,227,145,1)), color-stop(50%,rgba(97,196,25,0.74)), color-stop(100%,rgba(180,227,145,0.48))); /* Chrome,Safari4+ */
-	background: -webkit-radial-gradient(center, ellipse cover,  rgba(180,227,145,1) 0%,rgba(97,196,25,0.74) 50%,rgba(180,227,145,0.48) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-radial-gradient(center, ellipse cover,  rgba(180,227,145,1) 0%,rgba(97,196,25,0.74) 50%,rgba(180,227,145,0.48) 100%); /* Opera 12+ */
-	background: -ms-radial-gradient(center, ellipse cover,  rgba(180,227,145,1) 0%,rgba(97,196,25,0.74) 50%,rgba(180,227,145,0.48) 100%); /* IE10+ */
-	background: radial-gradient(ellipse at center,  rgba(180,227,145,1) 0%,rgba(97,196,25,0.74) 50%,rgba(180,227,145,0.48) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b4e391', endColorstr='#7ab4e391',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-
-}
-
-.pointBorder {
-	width: 10px;
-	height: 10px;
-	position: absolute;
-	left: -3px;
-	top: -3px;
-	border-radius: 50%;
-	border: 3px solid rgb(76, 76, 121);
-	opacity: 0.5;
-	  margin-left: -3px;
-}
-
-.lineTransition {
-	transition: width 1s;
-	-webkit-transition: width 1s;
-}
-
-.lineTransition2 {
-transition: opacity 20s;
--webkit-transition: opacity 20s;
-}
-
-.lineGreen div {
-background: -moz-radial-gradient(center, ellipse cover,  rgba(180,227,145,1) 0%, rgba(97,196,25,0.74) 50%, rgba(180,227,145,0.48) 100%); /* FF3.6+ */
-background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(180,227,145,1)), color-stop(50%,rgba(97,196,25,0.74)), color-stop(100%,rgba(180,227,145,0.48))); /* Chrome,Safari4+ */
-background: -webkit-radial-gradient(center, ellipse cover,  rgba(180,227,145,1) 0%,rgba(97,196,25,0.74) 50%,rgba(180,227,145,0.48) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-radial-gradient(center, ellipse cover,  rgba(180,227,145,1) 0%,rgba(97,196,25,0.74) 50%,rgba(180,227,145,0.48) 100%); /* Opera 12+ */
-background: -ms-radial-gradient(center, ellipse cover,  rgba(180,227,145,1) 0%,rgba(97,196,25,0.74) 50%,rgba(180,227,145,0.48) 100%); /* IE10+ */
-background: radial-gradient(ellipse at center,  rgba(180,227,145,1) 0%,rgba(97,196,25,0.74) 50%,rgba(180,227,145,0.48) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b4e391', endColorstr='#7ab4e391',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-
-}
-
-.lineBlue div {
-	background: -moz-radial-gradient(center, ellipse cover,  rgba(63,196,233,1) 0%, rgba(63,196,233,0.81) 31%, rgba(63,196,233,0.61) 64%, rgba(63,196,233,0.39) 100%); /* FF3.6+ */
-	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(63,196,233,1)), color-stop(31%,rgba(63,196,233,0.81)), color-stop(64%,rgba(63,196,233,0.61)), color-stop(100%,rgba(63,196,233,0.39))); /* Chrome,Safari4+ */
-	background: -webkit-radial-gradient(center, ellipse cover,  rgba(63,196,233,1) 0%,rgba(63,196,233,0.81) 31%,rgba(63,196,233,0.61) 64%,rgba(63,196,233,0.39) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-radial-gradient(center, ellipse cover,  rgba(63,196,233,1) 0%,rgba(63,196,233,0.81) 31%,rgba(63,196,233,0.61) 64%,rgba(63,196,233,0.39) 100%); /* Opera 12+ */
-	background: -ms-radial-gradient(center, ellipse cover,  rgba(63,196,233,1) 0%,rgba(63,196,233,0.81) 31%,rgba(63,196,233,0.61) 64%,rgba(63,196,233,0.39) 100%); /* IE10+ */
-	background: radial-gradient(ellipse at center,  rgba(63,196,233,1) 0%,rgba(63,196,233,0.81) 31%,rgba(63,196,233,0.61) 64%,rgba(63,196,233,0.39) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3fc4e9', endColorstr='#633fc4e9',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-
-}
-.line {
-	width: 100%;
-	height:3px;
-	margin-top: -6px;
-	margin-left: 2px;
-}
-
-.lineBack {
-width: 100%;
-height:3px;
-margin-top: -6px;
-margin-left: 2px;
-opacity: 0.5;
-}
-
-.subLine div{
-	height: 3px;
-	float: left;
-	max-height: 3px;
-	/*margin-left: -7px;*/
-	position: relative;
-}
-
-.wire {
-	position: absolute;
-}
-
-.rotatedUp {
-	transform: rotate(-45deg);
-	transform-origin: 0;
-	position: relative;
-	transition: width 0.2s;
-}
-
-.rotatedDown {
-	transform: rotate(45deg);
-	transform-origin: 0;
-	transition: width 0.2s;
-}
-
-
+	
+	#centerOverflow {
+		background-color: white;
+		opacity: 0;		
+		width:100%;
+		height:100%;
+		position: absolute;
+		top: 0px;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+		transition: opacity 2s linear;
+	}
+	
+	#centerPoint {
+	background: rgb(207,231,250); /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover,  rgba(207,231,250,1) 0%, rgba(99,147,193,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(207,231,250,1)), color-stop(100%,rgba(99,147,193,1))); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(207,231,250,1) 0%,rgba(99,147,193,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  rgba(207,231,250,1) 0%,rgba(99,147,193,1) 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  rgba(207,231,250,1) 0%,rgba(99,147,193,1) 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  rgba(207,231,250,1) 0%,rgba(99,147,193,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cfe7fa', endColorstr='#6393c1',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	
+		opacity: 0;
+		border-radius: 50%;		
+		width:40px;
+		height:40px;
+		position: absolute;
+		top: -10px;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+		transition: opacity 0.5s linear;
+	}
+	
+	.line.subLine div {
+	transition: width 0.4s linear;
+	}
+	
 </style>
 
 <script>
-	
+	var lastAnim = {
+		lastAnim: function() {
+			var lines = document.getElementsByClassName('line');
+			var i=0;
+			for(i=0; i< lines.length; i++) {
+				var childs = lines[i].children;
+				for(j=0; j< childs.length; j++) {
+					childs[j].myWidth = childs[j].style.width;
+					childs[j].style.width = 0;
+				}
+			}
+		
+			var wires = document.getElementsByClassName('wire');
+			setTimeout(function() {
+				lastAnim.animate(wires);
+				
+				setTimeout(function() {
+					var center = document.getElementById('center');
+					var center2 = document.getElementById('center2');
+					
+					var centerCpy = center.cloneNode(true);
+					var centerCpy2 = center2.cloneNode(true);
+					
+					var centerCpy3 = center.cloneNode(true);
+					var centerCpy4 = center2.cloneNode(true);
+					
+					var back = document.getElementById('background');
+					
+					back.insertBefore(centerCpy, center);
+					back.insertBefore(centerCpy2, center2);
+					setTimeout(function() {
+						back.insertBefore(centerCpy3, center);
+						back.insertBefore(centerCpy4, center2);
+					}, 300);
+					setTimeout(lastAnim.animateCenterPoint, 700);
+				}, 3500);
+			}, 300);
+		},
+		
+		animateCenterPoint: function() {
+			var centerPoint = document.getElementById("centerPoint");
+			var centerOverflow = document.getElementById("centerOverflow");
+			
+			centerOverflow.style.opacity = "1";
+			centerPoint.style.opacity = "1";
+		},
+		
+		animate: function(wires) {
+			var i=0;
+			for(;i<wires.length;i++) {
+				wires[i].children[0].style.opacity = 1;
+				
+				if(wires[i].children[1].firstChild !=null) {
+					var line = wires[i].children[1];
+					lastAnim.animateSubline(line, 0);
+				} else {
+					var j=i;
+					//wires[i].style.opacity = 0;
+				}
+			}
+				
+		},
+		
+		animateSubline: function(line, i) {
+			var transitionEnd = lastAnim.transitionEndEventName();
+			line.children[i].style.width = line.children[i].myWidth;
+			line.children[i].addEventListener(transitionEnd, function() {
+				line.children[i].removeEventListener(transitionEnd, arguments.callee);
+				i++;
+				if(line.children[i] != null) {
+					lastAnim.animateSubline(line, i);
+				} else {
+					var wire = line.parentElement;
+					
+					wire.addEventListener(transitionEnd, function() {
+						wire.removeEventListener(transitionEnd, arguments.callee);
+						//wire.style.opacity = 0;
+					}, false);
+				}
+			}, false);
+		},
+		
+		transitionEndEventName: function() {
+			var i,
+			undefined,
+			el = document.createElement('div'),
+			transitions = {
+				'transition':'transitionend',
+				'OTransition':'otransitionend',  // oTransitionEnd in very old Opera
+				'MozTransition':'transitionend',
+				'WebkitTransition':'webkitTransitionEnd'
+			};
+			
+			for (i in transitions) {
+				if (transitions.hasOwnProperty(i) && el.style[i] !== undefined) {
+					return transitions[i];
+				}
+			}
+			
+			//TODO: throw 'TransitionEnd event is not supported in this browser'; 
+		}
+	}
+	document.addEventListener('DOMContentLoaded', lastAnim.lastAnim, false); 
+
 </script>
 
-<style>
-	#loginForm {
-		
-	}
-	
-</style>
-
 	<div id="background">
+		<div id="center">
+			<div class="wire lineTransition2" style="width: 420px; left: 5%; top: 30%;">
+				<div class="pointBlue point">
+					<div class="pointBorder"></div>
+				</div>
+				<div class="line lineBlue subline">
+					<div style="bottom: 0px; left: 0px; width: 127px;"></div>
+					<div class="rotatedDown" style="bottom: 0px; left: 0px; width: 84px;"></div>
+					<div style="bottom: -59px; left: -25px; width: 85px;"></div>
+					<div class="rotatedDown" style="bottom: -58px; left: -25px; width: 111px;"></div>
+				</div>
+				
+			</div><div class="wire lineTransition2" style="width: 550px; left: -14%; top: 43%;">
+				<div class="pointBlue point">
+					<div class="pointBorder"></div>
+				</div>
+				<div class="line lineBlue subline">
+					<div style="bottom: 0px; left: 0px; width: 127px;"></div>
+					<div class="rotatedDown" style="bottom: 0px; left: 0px; width: 41px;"></div>
+					<div style="bottom: -29px; left: -12px; width: 85px;"></div>
+					<div class="rotatedDown" style="bottom: -28px; left: -13px; width: 40px;"></div>
+					<div style="bottom: -56px; left: -26px; width: 174px;"></div>
+					<div class="rotatedDown" style="bottom: -55px; left: -27px; width: 26px;"></div>
+					<div style="bottom: -73px; left: -35px; width: 46px;"></div>
+					
+				</div>
+				
+			</div>
+			
+			<div class="wire lineTransition2" style="width: 406.064485742805px; left: 5%; top: 70%;">
+				<div class="pointGreen point">
+					<div class="pointBorder"></div>
+				</div>
+				<div class="line lineGreen subline">
+					<div class="rotatedUp" style="bottom: 0px; left: 0px; width: 40px;">
+						
+					</div>
+					<div style="bottom: 28px; left: -12px; width: 150px;">
+						
+					</div>
+					<div class="rotatedUp" style="bottom: 28px; left: -12px; width: 40px;">
+						
+					</div>
+					
+					<div style="bottom: 56px; left: -24px; width: 150px;">
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="wire lineTransition2" style="width: 406.064485742805px; left: 20.5%; top: 86%;">
+				<div class="pointGreen point">
+					<div class="pointBorder"></div>
+				</div>
+				<div class="line lineGreen subline">
+					<div class="rotatedUp" style="bottom: 0px; left: 0px; width: 80px;">
+						
+					</div>
+					<div style="bottom: 56px; left: -25px; width: 97px;">
+						
+					</div>
+					<div class="rotatedUp" style="bottom: 55px; left: -27px; width: 117px;">
+						
+					</div>
+					
+					
+				</div>
+				
+			</div>
+			
+			<div class="wire lineTransition2" style="width: 550px; left: -14%; top: 83%;">
+				<div class="pointBlue point">
+					<div class="pointBorder"></div>
+				</div>
+				<div class="line lineBlue subline">
+					<div style="bottom: 0px; left: 0px; width: 200px;"></div>
+					<div class="rotatedUp" style="bottom: 0px; left: 0px; width: 90px;"></div>
+					<div style="bottom: 64px; left: -27px; width: 85px;"></div>
+					<div class="rotatedUp" style="bottom: 63px; left: -27px; width: 40px;"></div>
+					<div style="bottom: 91px; left: -39px; width: 50px;"></div>
+					<div class="rotatedUp" style="bottom: 90px; left: -39px; width: 26px;"></div>
+					<div style="bottom: 108px; left: -47px; width: 37px;"></div>
+					<div class="rotatedUp" style="bottom: 107px; left: -48px; width: 16px;"></div>
+				</div>
+				
+			</div>
+			<div class="wire lineTransition2" style="width: 516px; left: -8%; top: 26%;">
+				<div class="pointGreen point">
+					<div class="pointBorder"></div>
+				</div>
+				<div class="line lineGreen subline">
+					
+					<div class="rotatedDown" style="bottom: 0px; left: 0px; width: 84px;"></div>
+					<div style="bottom: -59px; left: -25px; width: 133px;"></div>
+					<div class="rotatedDown" style="bottom: -58px; left: -25px; width: 68px;"></div>
+					
+					
+					
+					
+				<div style="bottom: -105px; left: -45px; width: 143px;"></div><div class="rotatedDown" style="bottom: -105px; left: -45px; width: 68px;"></div><div style="bottom: -153px; left: -65px; width: 12px;"></div></div>
+				
+			</div>
+			
+			<div class="wire lineTransition2" style="width: 516px; left: 24%; top: 22%;">
+				<div class="pointGreen point">
+					<div class="pointBorder"></div>
+				</div>
+				<div class="line lineGreen subline">
+					
+					<div class="rotatedDown" style="bottom: 0px; left: 0px; width: 84px;"></div>
+					<div style="bottom: -59px; left: -25px; width: 94px;"></div>
+					<div class="rotatedDown" style="bottom: -58px; left: -25px; width: 68px;"></div>
+					
+					
+					
+					
+				<div class="rotatedDown" style="bottom: -105px; left: -45px; width: 76px;transform: rotate(90deg);"></div></div>
+				
+			</div>
+		</div>
+		
+		<div id="center2" style="transform: scale(-1,1);">
+			<div class="wire lineTransition2" style="width: 420px; left: 5%; top: 30%;">
+				<div class="pointBlue point">
+					<div class="pointBorder"></div>
+				</div>
+				<div class="line lineBlue subline">
+					<div style="bottom: 0px; left: 0px; width: 127px;"></div>
+					<div class="rotatedDown" style="bottom: 0px; left: 0px; width: 84px;"></div>
+					<div style="bottom: -59px; left: -25px; width: 85px;"></div>
+					<div class="rotatedDown" style="bottom: -58px; left: -25px; width: 111px;"></div>
+					
+					
+					
+					
+				</div>
+				
+				</div><div class="wire lineTransition2" style="width: 550px; left: -14%; top: 43%;">
+				<div class="pointBlue point">
+					<div class="pointBorder"></div>
+				</div>
+				<div class="line lineBlue subline">
+					<div style="bottom: 0px; left: 0px; width: 127px;"></div>
+					<div class="rotatedDown" style="bottom: 0px; left: 0px; width: 41px;"></div>
+					<div style="bottom: -29px; left: -12px; width: 85px;"></div>
+					<div class="rotatedDown" style="bottom: -28px; left: -13px; width: 40px;"></div>
+					<div style="bottom: -56px; left: -26px; width: 174px;"></div>
+					<div class="rotatedDown" style="bottom: -55px; left: -27px; width: 26px;"></div>
+					<div style="bottom: -73px; left: -35px; width: 46px;"></div>
+					
+				</div>
+				
+			</div>
+			
+			<div class="wire lineTransition2" style="width: 406.064485742805px; left: 5%; top: 70%;">
+				<div class="pointGreen point">
+					<div class="pointBorder"></div>
+				</div>
+				<div class="line lineGreen subline">
+					<div class="rotatedUp" style="bottom: 0px; left: 0px; width: 40px;">
+						
+					</div>
+					<div style="bottom: 28px; left: -12px; width: 150px;">
+						
+					</div>
+					<div class="rotatedUp" style="bottom: 28px; left: -12px; width: 40px;">
+						
+					</div>
+					
+					<div style="bottom: 56px; left: -24px; width: 150px;">
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="wire lineTransition2" style="width: 406.064485742805px; left: 20.5%; top: 86%;">
+				<div class="pointGreen point">
+					<div class="pointBorder"></div>
+				</div>
+				<div class="line lineGreen subline">
+					<div class="rotatedUp" style="bottom: 0px; left: 0px; width: 80px;">
+						
+					</div>
+					<div style="bottom: 56px; left: -25px; width: 97px;">
+						
+					</div>
+					<div class="rotatedUp" style="bottom: 55px; left: -27px; width: 117px;">
+						
+					</div>
+					
+					
+				</div>
+				
+			</div>
+			
+			<div class="wire lineTransition2" style="width: 550px; left: -14%; top: 83%;">
+				<div class="pointBlue point">
+					<div class="pointBorder"></div>
+				</div>
+				<div class="line lineBlue subline">
+					<div style="bottom: 0px; left: 0px; width: 200px;"></div>
+					<div class="rotatedUp" style="bottom: 0px; left: 0px; width: 90px;"></div>
+					<div style="bottom: 64px; left: -27px; width: 85px;"></div>
+					<div class="rotatedUp" style="bottom: 63px; left: -27px; width: 40px;"></div>
+					<div style="bottom: 91px; left: -39px; width: 50px;"></div>
+					<div class="rotatedUp" style="bottom: 90px; left: -39px; width: 26px;"></div>
+					<div style="bottom: 108px; left: -47px; width: 37px;"></div>
+					<div class="rotatedUp" style="bottom: 107px; left: -48px; width: 16px;"></div>
+				</div>
+				
+			</div>
+			<div class="wire lineTransition2" style="width: 516px; left: -8%; top: 26%;">
+				<div class="pointGreen point">
+					<div class="pointBorder"></div>
+				</div>
+				<div class="line lineGreen subline">
+					
+					<div class="rotatedDown" style="bottom: 0px; left: 0px; width: 84px;"></div>
+					<div style="bottom: -59px; left: -25px; width: 133px;"></div>
+					<div class="rotatedDown" style="bottom: -58px; left: -25px; width: 68px;"></div>				
+				<div style="bottom: -105px; left: -45px; width: 143px;"></div><div class="rotatedDown" style="bottom: -105px; left: -45px; width: 68px;"></div><div style="bottom: -153px; left: -65px; width: 12px;"></div></div>
+				
+			</div>
+			
+			<div class="wire lineTransition2" style="width: 516px; left: 24%; top: 22%;">
+				<div class="pointGreen point">
+					<div class="pointBorder"></div>
+				</div>
+				<div class="line lineGreen subline">
+					
+					<div class="rotatedDown" style="bottom: 0px; left: 0px; width: 84px;"></div>
+					<div style="bottom: -59px; left: -25px; width: 94px;"></div>
+					<div class="rotatedDown" style="bottom: -58px; left: -25px; width: 68px;"></div>
+
+				<div class="rotatedDown" style="bottom: -105px; left: -45px; width: 76px;transform: rotate(90deg);"></div></div>
+				
+			</div>
+				
+				
+			</div>
+			
+		<div id="centerPoint" style="">
+		</div>
+		<div id="centerOverflow" style="">
+		</div>
 	</div>
 
 	

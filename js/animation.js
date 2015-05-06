@@ -1,12 +1,28 @@
 
 	var nrOfWires = 0;
-	function initFn2(element) {
-		var i;
-		var MAX_WIRES = 45;
+	function initFn() {
+		var lines = document.getElementsByClassName('lineTransFast');
+		var i=0;
+		for(i=0; i< lines.length; i++) {
+			var childs = lines[i].children;
+			for(j=0; j< childs.length; j++) {
+				childs[j].myWidth = childs[j].style.width;
+				childs[j].style.width = 0;
+			}
+		}
+		
 		setTimeout(function() {
 			var login = document.getElementById('loginForm');
 			login.style.opacity = 1;
 		}, 400);
+		
+		initFn2(false);
+	}
+	
+	function initFn2(element) {
+		var i;
+		var MAX_WIRES = 45;
+
 		var backgroundDiv = document.getElementById('background');
 		
 		var maxWidth = backgroundDiv.offsetWidth;
@@ -58,7 +74,7 @@
 			lineDiv.classList.add('line' + color);
 			lineDiv.classList.add('subline');
 			
-			wire.classList.add('lineTransition2');
+			wire.classList.add('lineTransitionEndEffect');
 			
 			createSublines(lineDiv, width, height);
 			
@@ -153,6 +169,10 @@
 				lineDiv.appendChild(subLineDiv);
 			}
 		}
+		/**
+		 * Ustawia poczatkowa szerokosc linii na 0
+		 * i zapisuje do zmiennej myWidth obiektu docelowa
+		 */
 		function prepareAnimate(wires) {
 			var i;
 			for(i=0; i<wires.length;i++) {
@@ -266,31 +286,57 @@
 		//TODO: throw 'TransitionEnd event is not supported in this browser'; 
 	}
 	
-	document.addEventListener('DOMContentLoaded', initFn2, false); 
-	
-	
+		document.addEventListener('DOMContentLoaded', initFn, false); 
 		window.onload = addListeners;
 
 	function addListeners(){
 		document.getElementById('loginForm').addEventListener('mousedown', mouseDown, false);
 		window.addEventListener('mouseup', mouseUp, false);
-		document.getElementById('loginInput').addEventListener('keyup', validLogin, false);
-		document.getElementById('passInput').addEventListener('keyup', validPass, false);
+		document.getElementById('loginInput').addEventListener('keydown', validLogin, false);
+		document.getElementById('passInput').addEventListener('keydown', validPass, false);
+	
+		document.getElementById('loginBtn').addEventListener('click', clickOnLoginBtn, false);
 	}
 	
-	function validLogin() {
+	function clickOnLoginBtn() {
+		var login = document.getElementById('loginInput').value;
+		var pass = document.getElementById('passInput').value;
+		
+		if(login != '' && pass != '') {
+			MAX_WIRES=0;
+			var back = document.getElementById('background');
+			back.style.display="none";
+			document.getElementById('background2').style.opacity=1;
+			
+			document.getElementById('loginForm').style.transition = "opacity 0.3s linear";
+			document.getElementById('loginForm').style.opacity=0;
+			
+			lastAnim.lastAnim();
+		}
+	}
+	
+	function validLogin(e) {
 		if(this.value != '') {
 			this.previousElementSibling.style.opacity=1;
 		} else {
 			this.previousElementSibling.style.opacity=0;
 		}
+		
+		if(e.keyCode==13) {
+			e.preventDefault();
+			clickOnLoginBtn();
+		}
 	}
 	
-	function validPass() {
+	function validPass(e) {
 		if(this.value != '') {
 			this.previousElementSibling.style.opacity=1;
 		} else {
 			this.previousElementSibling.style.opacity=0;
+		}
+		if(e.keyCode==13) {
+			e.preventDefault();
+			clickOnLoginBtn();
 		}
 	}
 
@@ -320,3 +366,84 @@
 		  div.style.right = 'initial';
 		  div.style.bottom = 'initial';
 	  }
+	 	var lastAnim = {
+		lastAnim: function() {
+			
+			
+			var wires = document.getElementsByClassName('lineTransition2');			
+			
+			setTimeout(function() {
+			lastAnim.animate(wires);
+			
+			setTimeout(function() {
+				var center = document.getElementById('center');
+				var center2 = document.getElementById('center2');
+				
+				var centerCpy = center.cloneNode(true);
+				var centerCpy2 = center2.cloneNode(true);
+				
+				var centerCpy3 = center.cloneNode(true);
+				var centerCpy4 = center2.cloneNode(true);
+				
+				var back = document.getElementById('background2');
+				
+				back.insertBefore(centerCpy, center);
+				back.insertBefore(centerCpy2, center2);
+				setTimeout(function() {
+					back.insertBefore(centerCpy3, center);
+					back.insertBefore(centerCpy4, center2);
+				}, 300);
+				setTimeout(lastAnim.animateCenterPoint, 300);
+			}, 1300);
+			},30);
+		},
+		
+		animateCenterPoint: function() {
+			var centerPoint = document.getElementById("centerPoint");
+			var centerOverflow = document.getElementById("centerOverflow");
+			
+			centerOverflow.style.opacity = "1";
+			centerPoint.style.opacity = "1";
+			
+			setTimeout(function(){ 
+				document.getElementById('loginFormForm').submit();
+			}, 600);
+		},
+		
+		animate: function(wires) {
+			var i=0;
+			for(;i<wires.length;i++) {
+				wires[i].children[0].style.opacity = 1;
+				
+				if(wires[i].children[1].firstChild !=null) {
+					var line = wires[i].children[1];
+					lastAnim.animateSubline(line, 0);
+				} else {
+					var j=i;
+					//wires[i].style.opacity = 0;
+				}
+			}
+				
+		},
+		
+		animateSubline: function(line, i) {
+			var transitionEnd = transitionEndEventName();
+			line.children[i].style.width = line.children[i].myWidth;
+			line.children[i].addEventListener(transitionEnd, function() {
+				line.children[i].removeEventListener(transitionEnd, arguments.callee);
+				i++;
+				if(line.children[i] != null) {
+					lastAnim.animateSubline(line, i);
+				} else {
+					var wire = line.parentElement;
+					
+					wire.addEventListener(transitionEnd, function() {
+						wire.removeEventListener(transitionEnd, arguments.callee);
+						//wire.style.opacity = 0;
+					}, false);
+				}
+			}, false);
+			//TODO: throw 'TransitionEnd event is not supported in this browser'; 
+		}
+	} 
+	  
