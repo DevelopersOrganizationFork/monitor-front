@@ -1,6 +1,6 @@
 angular.module('controllers').controller('sensorsController', [
     '$scope', '$timeout', '$q', 'Sensor','ngTableParams', '$filter',
-    function($scope, $timeout, $q, Sensor,ngTableParams, $filter) {
+    function($scope, $timeout, $q, Sensor, ngTableParams, $filter) {
         $scope.activeTab='sensors';
 		var sensors;
 
@@ -40,25 +40,7 @@ angular.module('controllers').controller('sensorsController', [
                 sensors = data;
                 d.resolve();
             });
-
-            // mock data
-            /*sensors = [
-                {
-                    id: 0,
-                    cpuUsage: 10,
-                    ramUsage: 2100
-                },
-                {
-                    id: 1,
-                    cpuUsage: 89,
-                    ramUsage: 5500
-                },
-				{
-					id: 2,
-					cpuUsage: 65,
-					ramUsage: 2900
-				}
-            ];*/
+			
             return d.promise;
         }
     }

@@ -13,9 +13,13 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'templates/sensors.html',
             controller: 'sensorsController'
         })
-		.when('/measurements', {
-			templateUrl: 'templates/measurements.html',
-			controller: 'measurementsController'
+		.when('/measurement/:name*', {
+			templateUrl: 'templates/measurement.html',
+			controller: 'measurementController'
+		})	
+		.when('/measurementsList', {
+			templateUrl: 'templates/measurementsList.html',
+			controller: 'measurementsListController'
 		})
 		.when('/home', {
 			templateUrl: 'templates/home.html',
@@ -42,7 +46,8 @@ app.config(['$translateProvider', function ($translateProvider) {
 
 angular.module('config', []).constant('config', {
     apiUrl: 'http://localhost:18080/monitor-back/fake/hosts/2/',
-    sensorsUrl: 'http://localhost:18080/monitor-back/hosts'
+	sensorsUrl: 'http://localhost:18080/monitor-back/hosts',
+    sensorsFakeUrl: 'http://localhost:18080/monitor-back/fake/hosts'
 });
 angular.module('controllers', ['chart.js']);
 angular.module('directives', []);

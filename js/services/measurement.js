@@ -1,5 +1,5 @@
 angular.module('services').factory('Measurement', ['$resource', 'config', function ($resource, config) {
-    return $resource(config.apiUrl +'measurements/:type', {type: '@type'}, {
+    return $resource(config.sensorsFakeUrl +'/:id/measurements/:type', {id: '@id', type: '@type'}, {
         query: {
             method: 'GET',
             isArray: true

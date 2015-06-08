@@ -5,5 +5,7 @@
 	"BUTTON_TEXT_PL":"Polish language",
 	"BUTTON_TEXT_EN":"English language",
 	"MEASUREMENT":"Measurements",
-    "HOME_TITLE":"Choose monitor"
+    "HOME_TITLE":"Choose monitor",
+	"RESOURCES":"Resources",
+	"MEASUREMENTS_LIST": "List of all measurements"
 }

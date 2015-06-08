@@ -5,7 +5,8 @@
 	"BUTTON_TEXT_PL":"Język polski",
 	"BUTTON_TEXT_EN":"Język angielski",
 	"MEASUREMENT":"Pomiary",
-    "HOME_TITLE":"Wybierz monitor"
-	
+    "HOME_TITLE":"Wybierz monitor",
+	"RESOURCES":"Zasoby",
+	"MEASUREMENTS_LIST": "Lista wszystkich pomiarów"
 }
 		

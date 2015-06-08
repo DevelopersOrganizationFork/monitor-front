@@ -14,8 +14,9 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav {{$route.current.scope.activeTab}}">
                 <li><a href="#/home" class="home">{{ 'HOME' | translate }}</a></li>
-                <li><a href="#/sensors" class="sensors">{{ 'SENSORS' | translate }}</a></li>
-				<li><a href="#/measurements" class="measurements">{{ 'MEASUREMENT' | translate }}</a></li>
+                <li><a href="#/resources" class="resources">{{ 'RESOURCES' | translate }}</a></li>
+				<li><a href="#/sensors" class="sensors">{{ 'SENSORS' | translate }}</a></li>
+				<li><a href="#/measurementsList" class="measurements">{{ 'MEASUREMENT' | translate }}</a></li>
             </ul>
         </div>
 		<div id="languages" ng-controller="navController as navCtrl">
@@ -43,9 +44,11 @@
 <script src="js/controllers/main.js"></script>
 <script src="js/controllers/sensors.js"></script>
 <script src="js/controllers/navigation.js"></script>
-<script src="js/controllers/measurements.js"></script>
+<script src="js/controllers/measurement.js"></script>
+<script src="js/controllers/measurementsList.js"></script>
 <script src="js/controllers/home.js"></script>
 <script src="js/services/sensor.js"></script>
 <script src="js/services/measurement.js"></script>
+<script src="js/services/measurementsList.js"></script>
 </body>
 </html>
