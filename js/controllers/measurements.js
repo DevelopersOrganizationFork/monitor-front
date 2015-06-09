@@ -5,7 +5,8 @@ angular.module('controllers').controller('measurementsController', [
         var measurements = {
             cpu: null,
             memory: null,
-            network: null
+            networkup: null,
+            networkdown: null
         };
         var series = {}, labels = {}, data = {};
         var sensorId = $routeParams.name.slice(-1); // temporary solution for getting sensor ID
@@ -41,10 +42,17 @@ angular.module('controllers').controller('measurementsController', [
                 }, 0);
             });
 
-        fetchMeasurementsData('NETWORK')
+        fetchMeasurementsData('NETWORKUP')
             .then(function() {
                 $timeout(function () {
-                    onDataFetchSuccess('NETWORK');
+                    onDataFetchSuccess('NETWORKUP');
+                }, 0);
+            });
+
+        fetchMeasurementsData('NETWORKDOWN')
+            .then(function() {
+                $timeout(function () {
+                    onDataFetchSuccess('NETWORKDOWN');
                 }, 0);
             });
         // ***************************
