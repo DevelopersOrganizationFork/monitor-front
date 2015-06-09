@@ -10,7 +10,12 @@
         data="data['MEMORY']" labels="labels['MEMORY']" series="series['MEMORY']">
 </canvas>
 
-<h3>NETWORK measurements</h3>
-<canvas ng-if="data['NETWORK']" id="line-chart-network" class="chart chart-line" legend="true"
-        data="data['NETWORK']" labels="labels['NETWORK']" series="series['NETWORK']">
+<h3>NETWORK upload measurements</h3>
+<canvas ng-if="data['NETWORKUP']" id="line-chart-networkup" class="chart chart-line" legend="true"
+        data="data['NETWORKUP']" labels="labels['NETWORKUP']" series="series['NETWORKUP']">
+</canvas>
+
+<h3>NETWORK download measurements</h3>
+<canvas ng-if="data['NETWORKDOWN']" id="line-chart-networkdown" class="chart chart-line" legend="true"
+        data="data['NETWORKDOWN']" labels="labels['NETWORKDOWN']" series="series['NETWORKDOWN']">
 </canvas>
