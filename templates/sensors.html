@@ -5,15 +5,15 @@ img {
 </style>
 
 <div class="page-header">
-    <h1>Dane z sensorów</h1>
+    <h1>{{ 'SENSORS_TITLE' | translate }}</h1>
 </div>
   
 <table ng-table="sensorTable" show-filter="false" class="table table-stripped table-hover">
 	<tr ng-repeat="sensor in $data">
-        <td data-title="'ID'" sortable="'name'" filter="{ 'name': 'text' }"><a href="#/measurements">Sensor {{sensor.name}}</a></td>
+        <td data-title="'ID'" sortable="'name'" filter="{ 'name': 'text' }"><a href="#/measurements/{{sensor.name}}">Sensor {{sensor.name}}</a></td>
         <td data-title="'CPU Usage'" sortable="'href'" filter="{ 'href': 'text' }"><a href="#/cpuUsage"><img src="/img/compIcon.png"/></a></td>
         <td data-title="'Memory'" sortable="'href'" filter="{ 'href': 'text' }"><a href="#/memory"><img src="/img/memoryIcon.png"/></a></td>
-         <td data-title="'Network upload'" sortable="'href'" filter="{ 'href': 'text' }"><a href="#/networkUp"><img src="/img/networkUp.png"/></a></td>
-         <td data-title="'Network download'" sortable="'href'" filter="{ 'href': 'text' }"><a href="#/networkDown"><img src="/img/networkDown.png"/></a></td>
+        <td data-title="'Network upload'" sortable="'href'" filter="{ 'href': 'text' }"><a href="#/networkUp"><img src="/img/networkUp.png"/></a></td>
+        <td data-title="'Network download'" sortable="'href'" filter="{ 'href': 'text' }"><a href="#/networkDown"><img src="/img/networkDown.png"/></a></td>
 	</tr>
 </table>
