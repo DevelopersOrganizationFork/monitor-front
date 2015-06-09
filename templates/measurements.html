@@ -1,0 +1,16 @@
+<h2>Sensor id: {{ sensorId }} measurements</h2>
+
+<h3>CPU measurements</h3>
+<canvas ng-if="data['CPU']" id="line-chart-cpu" class="chart chart-line" legend="true"
+        data="data['CPU']" labels="labels['CPU']" series="series['CPU']">
+</canvas>
+
+<h3>MEMORY measurements</h3>
+<canvas ng-if="data['MEMORY']" id="line-chart-memory" class="chart chart-line" legend="true"
+        data="data['MEMORY']" labels="labels['MEMORY']" series="series['MEMORY']">
+</canvas>
+
+<h3>NETWORK measurements</h3>
+<canvas ng-if="data['NETWORK']" id="line-chart-network" class="chart chart-line" legend="true"
+        data="data['NETWORK']" labels="labels['NETWORK']" series="series['NETWORK']">
+</canvas>

@@ -1,11 +1,12 @@
-{
+﻿{
 	"TITLE": "Monitor Klienta",
-	"HOME":"Strona główna",
-	"SENSORS":"Sensory",
-	"BUTTON_TEXT_PL":"Język polski",
-	"BUTTON_TEXT_EN":"Język angielski",
-	"MEASUREMENT":"Pomiary",
-    "HOME_TITLE":"Wybierz monitor",
+    "HOME":"Strona główna",
+    "HOME_TEXT":"Wybierz sensor z listy sensorów aby sprawdzić jego stan",
+    "SENSORS":"Sensory",
+    "SENSORS_TITLE": "Połączone sensory",
+    "BUTTON_TEXT_PL":"Język polski",
+    "BUTTON_TEXT_EN":"Język angielski",
+    "MEASUREMENT":"Pomiary",
 	"RESOURCES":"Zasoby",
 	"MEASUREMENTS_LIST": "Lista wszystkich pomiarów"
 }

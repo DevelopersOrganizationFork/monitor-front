@@ -1,11 +1,12 @@
 {
 	"TITLE" : "Client Monitor",
 	"HOME" : "Home",
+  	"HOME_TEXT":"Choose a sensor from sensors list to see it's state",
 	"SENSORS" : "Sensors",
+  	"SENSORS_TITLE": "Connected sensors",
 	"BUTTON_TEXT_PL":"Polish language",
 	"BUTTON_TEXT_EN":"English language",
 	"MEASUREMENT":"Measurements",
-    "HOME_TITLE":"Choose monitor",
 	"RESOURCES":"Resources",
 	"MEASUREMENTS_LIST": "List of all measurements"
 }
