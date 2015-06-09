@@ -52,3 +52,5 @@ angular.module('config', []).constant('config', {
 angular.module('controllers', ['chart.js']);
 angular.module('directives', []);
 angular.module('services', ['ngResource', 'config']);
+
+Chart.defaults.global.animation = false; // turn off chart animations
