@@ -156,11 +156,10 @@ angular.module('controllers').controller('measurementsController', [
 
 		// Stop pooling data - clear all intervals
 		$scope.$on("$destroy", function(){
-			for(var interval in intervals) {
-				if(intervals.hasOwnProperty(interval)) {
-					clearInterval(interval);
-				}
-			}
+			clearInterval(intervals.cpu);
+			clearInterval(intervals.memory);
+			clearInterval(intervals.networkup);
+			clearInterval(intervals.networkdown);
 		});
 
 		function formatDate(date) {
