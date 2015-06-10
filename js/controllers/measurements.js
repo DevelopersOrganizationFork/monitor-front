@@ -14,26 +14,31 @@ angular.module('controllers').controller('measurementsController', [
 
 		var colors = [['Red'], ['Green']];
 		
-		$scope.flags = [];
+		$scope.flags = {};
 		
-		for(type in measurements) {
+		for(var type in measurements) {
 			if(measurements.hasOwnProperty(type)) {
-				$scope.flags[type] = new Object();
-				
-				$scope.flags[type].chartShow = true;
-				$scope.flags[type].tableShow = true;
+				$scope.flags[type] = {
+					chartShow: true,
+					tableShow: true
+				};
 			}
 		}
-		
+
 		$scope.measurementsTable = [];
 		
         function onDataFetchSuccess(type) {
-            var tmpLabels = [], tmpData = [];
+            var tmpLabels = [], tmpData = [],
+				measurementDate = '';
 			
 			measurements[type] = $filter('orderBy')(measurements[type], 'date');
 			
             measurements[type].forEach(function(measurement) {
-                tmpLabels.push(formatDate(new Date(measurement.date)));
+                tmpLabels.push(formatTime(new Date(measurement.date)));
+				// Get dd-mm-yyyy for all measurements only if undefined
+				if (!measurementDate) {
+					measurementDate = formatDate(new Date(measurement.date));
+				}
                 tmpData.push( parseFloat(measurement.value).toFixed(4));
             });
 
@@ -56,7 +61,7 @@ angular.module('controllers').controller('measurementsController', [
 				}
 			});
 			
-            series[type] = ['Sensor ' + sensorId + ': ' + type];
+            series[type] = [type];
             labels[type] = [tmpLabels];
             data[type] = [tmpData];
 
@@ -65,50 +70,64 @@ angular.module('controllers').controller('measurementsController', [
             $scope.data = data;
 			//$scope.colours = colors[sensorId];
 
-        }
+			$scope.measurementDate = measurementDate;
+		}
 
-		function fetchAllData() {
+		// Fetching data
+		var intervalTime = 5000,
+			intervals = {
+				cpu: null,
+				memory: null,
+				networkup: null,
+				networkdown: null
+			};
+
+		fetchCpu();
+		intervals.cpu = setInterval(fetchCpu, intervalTime);
+
+		fetchMemory();
+		intervals.memory = setInterval(fetchMemory, intervalTime);
+
+		fetchNetworkUp();
+		intervals.networkup = setInterval(fetchNetworkUp, intervalTime);
+
+		fetchNetworkDown();
+		intervals.networkdown = setInterval(fetchNetworkDown, intervalTime);
+
+		function fetchCpu() {
 			fetchMeasurementsData('CPU')
 			.then(function() {
 				$timeout(function () {
-					fetchMemory();
 					onDataFetchSuccess('CPU');
 				}, 0);
 			});
 		}
 
-		fetchAllData();
-
 		function fetchMemory() {
 			fetchMeasurementsData('MEMORY')
 			.then(function() {
 				$timeout(function () {
-					fetchNetUp();
 					onDataFetchSuccess('MEMORY');
 				}, 0);
 			});
 		}
 
-		function fetchNetUp() {
+		function fetchNetworkUp() {
 			fetchMeasurementsData('NETWORKUP')
 			.then(function() {
 				$timeout(function () {
-					fetchNetDown();
 					onDataFetchSuccess('NETWORKUP');
 				}, 0);
 			});
 		}
-		function fetchNetDown() {
+		function fetchNetworkDown() {
 			fetchMeasurementsData('NETWORKDOWN')
 				.then(function() {
 					$timeout(function () {
 						onDataFetchSuccess('NETWORKDOWN');
-						
-						fetchAllData();
 					}, 0);
 				});
 		}
-        // ***************************
 
         function fetchMeasurementsData(type) {
             var d = $q.defer();
@@ -116,12 +135,11 @@ angular.module('controllers').controller('measurementsController', [
                 measurements[type] = data;
                 d.resolve();
 			}, function() {
-				$timeout(function () {
-					fetchAllData();
-				}, 10000);
+				console.log('Fetch error: ' + type);
 			});
             return d.promise;
         }
+		// ***************************
 
         $scope.changeAmountOfData = function(nr, type) {
 			if($scope.data[type].dateAll) {
@@ -134,23 +152,37 @@ angular.module('controllers').controller('measurementsController', [
 			
 			$scope.data[type][0] = $scope.data[type][0].slice(-nr);
 			$scope.labels[type][0] = $scope.labels[type][0].slice(-nr);
-        }
-		
+        };
+
+		// Stop pooling data - clear all intervals
+		$scope.$on("$destroy", function(){
+			for(var interval in intervals) {
+				if(intervals.hasOwnProperty(interval)) {
+					clearInterval(interval);
+				}
+			}
+		});
+
 		function formatDate(date) {
-			
-            var day = date.getDay(),
+			var day = date.getDay(),
 				month = date.getMonth()+1,
-				year = date.getYear(),
-				hours = date.getHours(),
+				year = date.getFullYear();
+
+			day = day < 10 ? '0'+ day : day;
+			month = month < 10 ? '0'+ month : month;
+			return day + '-' + month + '-' + year;
+		}
+		
+		function formatTime(date) {
+			
+            var hours = date.getHours(),
 				minutes = date.getMinutes(),
-				seconds = date.getSeconds(),
-				mss = date.getMilliseconds();
-				
+				seconds = date.getSeconds();
+
+			hours = hours < 10 ? '0'+ hours : hours;
             minutes = minutes < 10 ? '0'+ minutes : minutes;
             seconds = seconds < 10 ? '0'+ seconds : seconds;
-            mss = mss < 100 ? '0'+ mss : mss;
-            mss = mss < 10 ? '0'+ mss : mss;
-            return day + '-' + month + '-' + year + ' '+ hours +':'+ minutes +':'+ seconds +':'+ mss;
+            return hours +':'+ minutes +':'+ seconds;
         }
     }
 ]);
