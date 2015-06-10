@@ -5,7 +5,7 @@
 <table ng-table="measurementsTable" show-filter="false" class="table table-stripped table-hover">
 	<tr ng-repeat="measurement in $data">
 		<td data-title="'ID'" sortable="'id'" filter="{ 'name': 'text' }">{{measurement.id}}</td>
-		<td data-title="'Type'" sortable="'type'" filter="{ 'href': 'text' }"><a href="#/measurement/{{measurement.type}}">{{measurement.type}}</a></td>
+		<td data-title="'Type'" sortable="'type'" filter="{ 'href': 'text' }"><a href="#/measType/{{measurement.type}}">{{measurement.type}}</a></td>
 		<td data-title="'Sensor'" sortable="'sensor'" filter="{ 'href': 'text' }">{{measurement.sensor}}</td>
 		<td data-title="'Date'" sortable="'date'" filter="{ 'href': 'text' }">{{measurement.date | date : 'dd.MM.yyyy hh:mm:sss'}}</td>
 	</tr>

@@ -17,6 +17,10 @@ app.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: 'templates/measurements.html',
 			controller: 'measurementsController'
 		})	
+		.when('/measType/:name*', {
+			templateUrl: 'templates/measType.html',
+			controller: 'measTypeController'
+		})
 		.when('/measurementsList', {
 			templateUrl: 'templates/measurementsList.html',
 			controller: 'measurementsListController'
@@ -24,6 +28,10 @@ app.config(['$routeProvider', function ($routeProvider) {
 		.when('/home', {
 			templateUrl: 'templates/home.html',
 			controller: 'homeController'
+		})
+		.when('/login', {
+			templateUrl: 'login.html',
+			controller: 'loginController'
 		})
         .otherwise({
             redirectTo: '/home'
@@ -45,10 +53,7 @@ app.config(['$translateProvider', function ($translateProvider) {
 	}]);
 
 angular.module('config', []).constant('config', {
-    apiUrl: 'http://localhost:18080/monitor-back/fake/hosts/2/',
-	sensorsUrl: 'http://localhost:18080/monitor-back/hosts',
-    sensorsFakeUrl: 'http://localhost:18080/monitor-back/fake/hosts',
-    measurementsUrl: 'http://localhost:18080/monitor-back/fake/hosts'
+	sensorsUrl: 'http://localhost:18080/monitor-back/hosts'
 });
 angular.module('controllers', ['chart.js']);
 angular.module('directives', []);

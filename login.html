@@ -1,6 +1,10 @@
 <head>
 	<link href="css/login.css" rel="stylesheet"/>
 	<script src="js/animation.js"></script>
+	<script src="node_modules/angular/angular.js"></script>
+	<script src="node_modules/angular-route/angular-route.js"></script>
+	<script src="node_modules/angular-resource/angular-resource.js"></script>
+	<script src="js/loginApp.js"></script>
 	  
 
 </head>
@@ -261,7 +265,7 @@
 	
 	
 	
-	<div id="loginForm">
+	<div id="loginForm" ng-app="app" ng-controller="loginController">
 		<form id="loginFormForm" action="/" method="GET">
 			<h1></h1>
 			<div class="loginInputDiv">

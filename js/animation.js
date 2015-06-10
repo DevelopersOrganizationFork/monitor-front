@@ -311,6 +311,8 @@
 			document.getElementById('loginForm').style.transition = "opacity 0.3s linear";
 			document.getElementById('loginForm').style.opacity=0;
 			
+			
+			
 			lastAnim.lastAnim();
 		}
 	}

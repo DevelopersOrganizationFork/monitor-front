@@ -27,36 +27,36 @@ angular.module('controllers').controller('measurementsListController', [
 			});
         }
 
-		getSensorsLength().then(function(sensors) {
-			getMeasurementsData(sensors.length);
+		getSensorsLength().then(function(sensorsResult) {
+			getMeasurementsData(sensorsResult);
 		});
             
 		function getSensorsLength() {
 			var d = $q.defer();
-            var sensors;
-			sensors = Sensor.query(function (data) {
-                d.resolve(sensors);
+            var sensorsResult;
+			sensorsResult = Sensor.query(function (data) {
+                d.resolve(sensorsResult);
             });
 			
             return d.promise;
 		}	
 
-        function getMeasurementsData(sensorsLength) {
+        function getMeasurementsData(sensorsResult) {
 			
 			var queries = [];
 			var i, j;
-			for(i = 0; i < sensorsLength; i++) {
-				queries.push(doQuery(''+i));
+			for(i = 0; i < sensorsResult.length; i++) {
+				queries.push(doQuery(sensorsResult[i].id));
 			}
 			
             $q.all(queries)
 			.then(function(data) {
                 $timeout(function () {
 					measurements = [];
-					for(i = 0; i < sensorsLength; i++) {
-						for(j = 0; j < data[i].length; j++) {
-							data[i][j].sensor = i;
-							measurements.push(data[i][j]);
+					for(i = 0; i < sensorsResult.length; i++) {
+						for(j = 0; j < sensorsResult[i].length; j++) {
+							sensorsResult[i][j].sensor = i;
+							measurements.push(sensorsResult[i][j]);
 						}
 					}
                     onDataFetchSuccess();
@@ -66,10 +66,10 @@ angular.module('controllers').controller('measurementsListController', [
 		
 		function doQuery(arg) {
 			var d = $q.defer();
-            var result = MeasurementsList.query({id:arg}, function (data) {
-                d.resolve(result);
-            });
-            return d.promise;
+			var result = MeasurementsList.query({id:arg}, function (data) {
+				d.resolve(result);
+			});
+			return d.promise;
 		}
     }
 ]);

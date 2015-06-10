@@ -1,21 +1,52 @@
-<h2>Sensor id: {{ sensorId }} measurements</h2>
+<style>
+	.glyphicon {
+		float: right;
+		display: inline;
+	}
+	h3 {
+		display: inline;
+		float: left;
+	}
+	.measurements > div{
+		clear: both;
+	}
+	
+	</style>
 
-<h3>CPU measurements</h3>
-<canvas ng-if="data['CPU']" id="line-chart-cpu" class="chart chart-line" legend="true"
-        data="data['CPU']" labels="labels['CPU']" series="series['CPU']">
-</canvas>
+<h2>Sensor - {{ sensorName }} {{ sensorId }}: measurements</h2>
 
-<h3>MEMORY measurements</h3>
-<canvas ng-if="data['MEMORY']" id="line-chart-memory" class="chart chart-line" legend="true"
-        data="data['MEMORY']" labels="labels['MEMORY']" series="series['MEMORY']">
-</canvas>
+<div class="measurements">
+	
+	<div ng-repeat="type in ['CPU', 'MEMORY', 'NETWORKUP', 'NETWORKDOWN'] track by $index">
+		<h3>{{type}} measurements</h3>
+		
+		<button class="btn btn-default glyphicon glyphicon-th-list" 
+			ng-click="flags[type].tableShow = !flags[type].tableShow" ng-class="{'active':flags[type].tableShow}"></button>
+		<button class="btn btn-default glyphicon glyphicon-stats" 
+			ng-click="flags[type].chartShow = !flags[type].chartShow" ng-class="{'active':flags[type].chartShow}"></button>
 
-<h3>NETWORK upload measurements</h3>
-<canvas ng-if="data['NETWORKUP']" id="line-chart-networkup" class="chart chart-line" legend="true"
-        data="data['NETWORKUP']" labels="labels['NETWORKUP']" series="series['NETWORKUP']">
-</canvas>
+		<div class="col-lg-6 col-sm-12" style="clear: both;" ng-show="flags[type].chartShow">
+			<canvas ng-if="data[type]" id="line-chart-memory" class="chart chart-line" legend="true"
+					data="data[type]" labels="labels[type][0]" series="series[type]">
+			</canvas>
+			
+			<button class="btn btn-default" ng-repeat="n in [0, 5, 10, 25, 50] track by $index"
+			ng-click="changeAmountOfData(n, type)" ng-class="{'active':data[type][0].length == n}">
+				<span>{{n == 0 ? 'All' : n}}</span>
+			</button>
+		
+		</div>
+		
+		<div class="col-lg-6 col-sm-12" ng-show="flags[type].tableShow" ng-class="{'clearBoth':!flags[type].chartShow}">
+			<table ng-table="measurementsTable[type]" show-filter="false" class="table table-stripped table-hover">
+				<tr ng-repeat="meas in $data">
+					<td data-title="'ID'" sortable="'id'" filter="{ 'name': 'text' }">{{meas.id}}</td>
+					<td data-title="'Value'" sortable="'value'" filter="{ 'href': 'text' }"><a href="#/measType/{{meas.type}}">{{meas.value}}</a></td>
+					<td data-title="'Date'" sortable="'date'" filter="{ 'href': 'text' }">{{meas.date | date : 'dd.MM.yyyy hh:mm:sss'}}</td>
+				</tr>
+			</table>
+			
+		</div>
+	</div>
 
-<h3>NETWORK download measurements</h3>
-<canvas ng-if="data['NETWORKDOWN']" id="line-chart-networkdown" class="chart chart-line" legend="true"
-        data="data['NETWORKDOWN']" labels="labels['NETWORKDOWN']" series="series['NETWORKDOWN']">
-</canvas>
+</div>
