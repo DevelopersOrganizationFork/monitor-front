@@ -3,10 +3,10 @@ angular.module('controllers').controller('measurementsController', [
     function ($scope, $timeout, $q, Measurements, $routeParams, ngTableParams, $filter) {
         $scope.activeTab = 'measurement';
         var measurements = {
-            CPU: null,
-            MEMORY: null,
-            NETWORKUP: null,
-            NETWORKDOWN: null
+            cpu: null,
+            memory: null,
+            networkup: null,
+            networkdown: null
         };
         var series = {}, labels = {}, data = {};
         var sensorId = $routeParams.name; // temporary solution for getting sensor ID
@@ -26,6 +26,13 @@ angular.module('controllers').controller('measurementsController', [
 		}
 
 		$scope.measurementsTable = [];
+		var units = {
+			cpu: '%',
+			memory: '%',
+			networkup: 'b',
+			networkdown: 'b'
+		};
+		$scope.units = units;
 		
         function onDataFetchSuccess(type) {
             var tmpLabels = [], tmpData = [],
@@ -61,7 +68,7 @@ angular.module('controllers').controller('measurementsController', [
 				}
 			});
 			
-            series[type] = [type];
+            series[type] = [type + ' (' + units[type] + ')'];
             labels[type] = [tmpLabels];
             data[type] = [tmpData];
 
@@ -95,43 +102,44 @@ angular.module('controllers').controller('measurementsController', [
 		intervals.networkdown = setInterval(fetchNetworkDown, intervalTime);
 
 		function fetchCpu() {
-			fetchMeasurementsData('CPU')
+			fetchMeasurementsData('cpu')
 			.then(function() {
 				$timeout(function () {
-					onDataFetchSuccess('CPU');
+					onDataFetchSuccess('cpu');
 				}, 0);
 			});
 		}
 
 		function fetchMemory() {
-			fetchMeasurementsData('MEMORY')
+			fetchMeasurementsData('memory')
 			.then(function() {
 				$timeout(function () {
-					onDataFetchSuccess('MEMORY');
+					onDataFetchSuccess('memory');
 				}, 0);
 			});
 		}
 
 		function fetchNetworkUp() {
-			fetchMeasurementsData('NETWORKUP')
+			fetchMeasurementsData('networkup')
 			.then(function() {
 				$timeout(function () {
-					onDataFetchSuccess('NETWORKUP');
+					onDataFetchSuccess('networkup');
 				}, 0);
 			});
 		}
 		function fetchNetworkDown() {
-			fetchMeasurementsData('NETWORKDOWN')
+			fetchMeasurementsData('networkdown')
 				.then(function() {
 					$timeout(function () {
-						onDataFetchSuccess('NETWORKDOWN');
+						onDataFetchSuccess('networkdown');
 					}, 0);
 				});
 		}
 
         function fetchMeasurementsData(type) {
             var d = $q.defer();
-            Measurements.query({id: sensorId, type: type}, function (data) {
+			var uppercaseType = type.toUpperCase(); // Endpoint needs type in uppercase
+			Measurements.query({id: sensorId, type: uppercaseType}, function (data) {
                 measurements[type] = data;
                 d.resolve();
 			}, function() {

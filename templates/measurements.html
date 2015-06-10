@@ -18,8 +18,8 @@
 
 <div class="measurements">
 	
-	<div ng-repeat="type in ['CPU', 'MEMORY', 'NETWORKUP', 'NETWORKDOWN'] track by $index">
-		<h3>{{type}} measurements</h3>
+	<div ng-repeat="type in ['cpu', 'memory', 'networkup', 'networkdown'] track by $index">
+		<h3>{{type.toUpperCase()}} measurements</h3>
 		
 		<button class="btn btn-default glyphicon glyphicon-th-list" 
 			ng-click="flags[type].tableShow = !flags[type].tableShow" ng-class="{'active':flags[type].tableShow}"></button>
