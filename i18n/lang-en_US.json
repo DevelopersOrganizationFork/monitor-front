@@ -8,5 +8,6 @@
 	"BUTTON_TEXT_EN":"English language",
 	"MEASUREMENT":"Measurements",
 	"RESOURCES":"Resources",
-	"MEASUREMENTS_LIST": "List of all measurements"
+	"MEASUREMENTS_LIST": "List of all measurements",
+  	"MEASUREMENTS_COMPLEX": "Complex measurements"
 }

@@ -132,6 +132,14 @@ body {
 .measurements {
 }
 
+.complex-measurements-form {
+	width: 30%;
+}
+
+.complex-measurements-form .submit-button {
+	margin-top: 20px;
+}
+
 .clearBoth {
 	clear: both;
 }

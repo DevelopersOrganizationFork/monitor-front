@@ -33,6 +33,10 @@ app.config(['$routeProvider', function ($routeProvider) {
 				requiresLogin: true
 			}
 		})
+		.when('/measurements-complex', {
+			templateUrl: 'templates/measurements-complex.html',
+			controller: 'measurementsComplexController'
+		})
 		.when('/home', {
 			templateUrl: 'templates/home.html',
 			controller: 'homeController',
@@ -64,7 +68,7 @@ app.config(['$translateProvider', function ($translateProvider) {
 	}]);
 
 angular.module('config', []).constant('config', {
-	sensorsUrl: 'http://192.168.243.108:18080/monitor-back/hosts'
+	sensorsUrl: 'http://10.20.109.23:18080/monitor-back/hosts'
 });
 angular.module('controllers', ['chart.js']);
 angular.module('directives', []);

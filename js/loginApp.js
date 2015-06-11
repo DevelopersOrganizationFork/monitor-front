@@ -7,7 +7,7 @@ angular.module('controllers', []);
 
 
 angular.module('services').factory('Login', ['$resource', function ($resource) {
-    return $resource('http\://192.168.243.108\:18080/monitor-back/users/login', {
+    return $resource('http\://10.20.109.23\:18080/monitor-back/users/login', {
 		"login": "@l",
 		"password": "@p"
 		}, {
