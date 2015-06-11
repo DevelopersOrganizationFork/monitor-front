@@ -274,17 +274,17 @@
 						
 					</div>
 				</div>
-				<input id="loginInput" type="text" maxlength="15"></input>
+				<input id="loginInput" type="text" maxlength="15" ng-keydown="validLogin($event)"></input>
 				
 				<div class="point pointStatus pointGreen" >
 					<div class="pointBorder">
 						
 					</div>
 				</div>
-				<input id="passInput" type="password" maxlength="15"></input>
+				<input id="passInput" type="password" maxlength="15" ng-keydown="validPass($event)"></input>
 				
-				<input id="loginBtnSubmit" type="submit" style="display: none;" value="Login"></input>
-				<input id="loginBtn" type="button" value="Login"></input>
+				<input id="loginBtnSubmit" type="submit" style="display: none;" value="Login" ></input>
+				<input id="loginBtn" type="button" value="Login" ng-click="clickOnLoginBtn()"></input>
 		</form>
 	</div>
 </body>

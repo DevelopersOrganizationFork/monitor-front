@@ -292,54 +292,6 @@
 	function addListeners(){
 		document.getElementById('loginForm').addEventListener('mousedown', mouseDown, false);
 		window.addEventListener('mouseup', mouseUp, false);
-		document.getElementById('loginInput').addEventListener('keydown', validLogin, false);
-		document.getElementById('passInput').addEventListener('keydown', validPass, false);
-	
-		document.getElementById('loginBtn').addEventListener('click', clickOnLoginBtn, false);
-	}
-	
-	function clickOnLoginBtn() {
-		var login = document.getElementById('loginInput').value;
-		var pass = document.getElementById('passInput').value;
-		
-		if(login != '' && pass != '') {
-			MAX_WIRES=0;
-			var back = document.getElementById('background');
-			back.style.display="none";
-			document.getElementById('background2').style.opacity=1;
-			
-			document.getElementById('loginForm').style.transition = "opacity 0.3s linear";
-			document.getElementById('loginForm').style.opacity=0;
-			
-			
-			
-			lastAnim.lastAnim();
-		}
-	}
-	
-	function validLogin(e) {
-		if(this.value != '') {
-			this.previousElementSibling.style.opacity=1;
-		} else {
-			this.previousElementSibling.style.opacity=0;
-		}
-		
-		if(e.keyCode==13) {
-			e.preventDefault();
-			clickOnLoginBtn();
-		}
-	}
-	
-	function validPass(e) {
-		if(this.value != '') {
-			this.previousElementSibling.style.opacity=1;
-		} else {
-			this.previousElementSibling.style.opacity=0;
-		}
-		if(e.keyCode==13) {
-			e.preventDefault();
-			clickOnLoginBtn();
-		}
 	}
 
 	function mouseUp()

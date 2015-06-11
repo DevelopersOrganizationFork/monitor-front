@@ -4,22 +4,42 @@ angular.module('controllers').controller('measTypeController', [
 			$scope.activeTab = 'measurement';
 			var measurements;
 			var typeOfMeas = $scope.typeOfMeas = $routeParams.name;
-
-			function onDataFetchSuccess() {
+			
+			function onDataFetchSuccess(sensors) {
 				var labels = [], data = [], series = [];
 				var i=0;
-				measurements.forEach(function(sensors) {
+				var now = new Date().getTime();
+				var min = now, max=0;
+				measurements.forEach(function(meas) {
 					labels[i] = [];
 					data[i] = [];
-					sensors.forEach(function(measurement) {
+					
+					meas.forEach(function(measurement) {
+						if(measurement.date < min) {
+							min = measurement.date;
+						}
+						if(measurement.date > max) {
+							max = measurement.date;
+						}
 						labels[i].push(formatDate(new Date(measurement.date)));
 						data[i].push(measurement.value);
 					});
-					series[i] = 'Sensor ' + i;
+					series[i] = 'Sensor ' + sensors[i].id;
 					i++;
 				});
+				var maxLength = 0;
+				for(var i=0; i<labels.length;i++) {
+					if(maxLength < labels[i].length) {
+						maxLength = labels[i].length;
+					}
+				}
+				var diff = max - min;
+				labels[i] = formatDate(new Date(min));
+				for(var i=1; i<maxLength;i++) {
+					labels[i] =formatDate(new Date(Math.floor(min + diff/i)));
+				}
 				$scope.series = series;
-				$scope.labels = labels[0];
+				$scope.labels = labels;
 				$scope.data = data;
 			}
 			
@@ -27,7 +47,7 @@ angular.module('controllers').controller('measTypeController', [
 				var d = $q.defer();
 				var sensors;
 				sensors = Sensor.query(function (data) {
-					d.resolve(sensors);
+					d.resolve(data);
 				});
 				
 				return d.promise;
@@ -36,25 +56,34 @@ angular.module('controllers').controller('measTypeController', [
 			
 			getSensorsLength().then(function(sensors) {
 				var queries = [];
-				var i, j;
-				for(i = 0; i < sensors.length; i++) {
-					queries.push(doQuery(''+i, typeOfMeas));
-				}
-				
-				$q.all(queries).then(function(data) {
-					$timeout(function () {
-						measurements = data;
-						onDataFetchSuccess();
-					}, 0);
-				});
+				var i=0, j=0;
 
+				var interval = setInterval(function() {
+					
+					queries.push(doQuery(sensors[i].id, typeOfMeas));
+					i++;
+					
+					if(i === sensors.length) {
+						clearInterval(interval);
+						
+						$q.all(queries).then(function(data) {
+
+							measurements = data;
+							onDataFetchSuccess(sensors);
+
+						});
+					}
+							
+				}, 1500);
 			});
 				
 
 			function doQuery(number, typeOfMeas) {
 				var d = $q.defer();
-				var result = Measurements.query({id: number, type: typeOfMeas}, function (data) {
-				    d.resolve(result);
+				Measurements.query({id: number, type: typeOfMeas}, function (data) {
+				    d.resolve(data);
+				}, function() {
+					d.resolve([]);
 				});
 
 				return d.promise;

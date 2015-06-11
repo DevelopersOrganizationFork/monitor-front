@@ -44,30 +44,49 @@ angular.module('controllers').controller('measurementsListController', [
         function getMeasurementsData(sensorsResult) {
 			
 			var queries = [];
-			var i, j;
-			for(i = 0; i < sensorsResult.length; i++) {
-				queries.push(doQuery(sensorsResult[i].id));
-			}
-			
-            $q.all(queries)
-			.then(function(data) {
-                $timeout(function () {
-					measurements = [];
-					for(i = 0; i < sensorsResult.length; i++) {
-						for(j = 0; j < sensorsResult[i].length; j++) {
-							sensorsResult[i][j].sensor = i;
-							measurements.push(sensorsResult[i][j]);
+			var types = ['CPU', 'MEMORY', 'NETWORKUP', 'NETWORKDOWN'];
+			var i=0, j=0;
+			var interval = setInterval(function() {
+				
+				queries.push(doQuery(sensorsResult[i].id, types[j]));
+				j++;
+				if(j == 4) {
+					j=0;
+					i++;
+				}
+				if(i === sensorsResult.length) {
+					clearInterval(interval);
+					
+					$q.all(queries)
+					.then(function(data) {
+						
+						measurements = [];
+						for(i = 0; i < data.length; i++) {
+							if(data[i] == null) {
+								continue;
+							}
+							for(j = 0; j < data[i].length; j++) {
+								data[i][j].sensor = sensorsResult[Math.floor(i/4)].id;
+								measurements.push(data[i][j]);
+							}
 						}
-					}
-                    onDataFetchSuccess();
-                }, 0);
-            });
+						onDataFetchSuccess();
+						
+					});
+				}
+			}
+			, 1000);
+			
+           
         }
 		
-		function doQuery(arg) {
+		function doQuery(arg, typ) {
 			var d = $q.defer();
-			var result = MeasurementsList.query({id:arg}, function (data) {
-				d.resolve(result);
+			var data;
+			data = MeasurementsList.query({id:arg, type:typ}, function (data) {
+				d.resolve(data);
+			}, function() {
+				d.resolve(null);
 			});
 			return d.promise;
 		}

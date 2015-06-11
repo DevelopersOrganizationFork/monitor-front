@@ -2,11 +2,12 @@
     <h1>{{ 'MEASUREMENTS_LIST' | translate }}</h1>
 </div>
   
-<table ng-table="measurementsTable" show-filter="false" class="table table-stripped table-hover">
+<table ng-table="measurementsTable" show-filter="true" class="table table-stripped table-hover">
 	<tr ng-repeat="measurement in $data">
 		<td data-title="'ID'" sortable="'id'" filter="{ 'name': 'text' }">{{measurement.id}}</td>
-		<td data-title="'Type'" sortable="'type'" filter="{ 'href': 'text' }"><a href="#/measType/{{measurement.type}}">{{measurement.type}}</a></td>
-		<td data-title="'Sensor'" sortable="'sensor'" filter="{ 'href': 'text' }">{{measurement.sensor}}</td>
-		<td data-title="'Date'" sortable="'date'" filter="{ 'href': 'text' }">{{measurement.date | date : 'dd.MM.yyyy hh:mm:sss'}}</td>
+		<td data-title="'Type'" sortable="'type'" filter="{ 'type': 'text' }"><a href="#/measType/{{measurement.type}}">{{measurement.type}}</a></td>
+		<td data-title="'Value'" sortable="'value'" filter="{ 'value': 'text' }">{{measurement.value}}</td>		
+		<td data-title="'Sensor'" sortable="'sensor'" filter="{ 'sensor': 'text' }">{{measurement.sensor}}</td>
+		<td data-title="'Date'" sortable="'date'" filter="{ 'date': 'text' }">{{measurement.date | date : 'dd.MM.yyyy hh:mm:sss'}}</td>
 	</tr>
 </table>

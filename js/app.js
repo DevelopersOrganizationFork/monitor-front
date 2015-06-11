@@ -5,29 +5,40 @@ var app = angular.module('app', [
 
 app.config(['$routeProvider', function ($routeProvider) {
         $routeProvider
-		.when('/login', {
-			templateUrl: 'login.html',
-			controller: 'loginController'
-		})
 		.when('/sensors', {
             templateUrl: 'templates/sensors.html',
-            controller: 'sensorsController'
+            controller: 'sensorsController',
+			access: {
+				requiresLogin: true
+			}
         })
 		.when('/measurements/:name*', {
 			templateUrl: 'templates/measurements.html',
-			controller: 'measurementsController'
+			controller: 'measurementsController',
+			access: {
+				requiresLogin: true
+			}
 		})	
 		.when('/measType/:name*', {
 			templateUrl: 'templates/measType.html',
-			controller: 'measTypeController'
+			controller: 'measTypeController',
+			access: {
+				requiresLogin: true
+			}
 		})
 		.when('/measurementsList', {
 			templateUrl: 'templates/measurementsList.html',
-			controller: 'measurementsListController'
+			controller: 'measurementsListController',
+			access: {
+				requiresLogin: true
+			}
 		})
 		.when('/home', {
 			templateUrl: 'templates/home.html',
-			controller: 'homeController'
+			controller: 'homeController',
+			access: {
+				requiresLogin: true
+			}
 		})
 		.when('/login', {
 			templateUrl: 'login.html',
@@ -53,10 +64,10 @@ app.config(['$translateProvider', function ($translateProvider) {
 	}]);
 
 angular.module('config', []).constant('config', {
-	sensorsUrl: 'http://localhost:18080/monitor-back/hosts'
+	sensorsUrl: 'http://192.168.243.108:18080/monitor-back/hosts'
 });
 angular.module('controllers', ['chart.js']);
 angular.module('directives', []);
 angular.module('services', ['ngResource', 'config']);
 
-Chart.defaults.global.animation = false; // turn off chart animations
+Chart.defaults.global.animation = false; // turn on chart animations

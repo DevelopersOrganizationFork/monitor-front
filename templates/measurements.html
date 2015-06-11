@@ -39,11 +39,11 @@
 		</div>
 		
 		<div class="col-lg-6 col-sm-12" ng-show="flags[type].tableShow" ng-class="{'clearBoth':!flags[type].chartShow}">
-			<table ng-table="measurementsTable[type]" show-filter="false" class="table table-stripped table-hover">
+			<table ng-table="measurementsTable[type]" show-filter="true" class="table table-stripped table-hover">
 				<tr ng-repeat="meas in $data">
-					<td data-title="'ID'" sortable="'id'" filter="{ 'name': 'text' }">{{meas.id}}</td>
-					<td data-title="'Value'" sortable="'value'" filter="{ 'href': 'text' }"><a href="#/measType/{{meas.type}}">{{meas.value}}</a></td>
-					<td data-title="'Date'" sortable="'date'" filter="{ 'href': 'text' }">{{meas.date | date : 'dd.MM.yyyy hh:mm:sss'}}</td>
+					<td data-title="'ID'" sortable="'id'" filter="{ 'id': 'text' }">{{meas.id}}</td>
+					<td data-title="'Value'" sortable="'value'" filter="{ 'value': 'text' }"><a href="#/measType/{{meas.type}}">{{meas.value}}</a></td>
+					<td data-title="'Date'" sortable="'date'" filter="{ 'date': 'date' }">{{meas.date | date : 'dd.MM.yyyy hh:mm'}}</td>
 				</tr>
 			</table>
 			
