@@ -1,0 +1,55 @@
+<h2>Complex measurements</h2>
+
+<div class="complex-measurements">
+
+	<form novalidate class="simple-form complex-measurements-form form-horizontal">
+		<div class="form-group">
+			<label class="col-xs-4 control-label">Time range</label>
+			<div class="col-xs-8">
+				<input type="number" ng-model="measurement.timeRange" class="form-control" placeholder="Time range"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-4 control-label">Interval</label>
+			<div class="col-xs-8">
+				<input type="number" ng-model="measurement.interval" class="form-control" placeholder="Interval"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-4 control-label">Time unit</label>
+			<div class="col-xs-8">
+				<select ng-model="measurement.timeUnit" class="form-control">
+					<option value="SECOND">second</option>
+					<option value="MINUTE">minute</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-4 control-label">Type</label>
+			<div class="col-xs-8">
+				<select ng-model="measurement.type" class="form-control">
+					<option value="CPU">cpu</option>
+					<option value="MEMORY">memory</option>
+					<option value="NETWORKUP">network up</option>
+					<option value="NETWORKDOWN">network down</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-4 control-label">Sensor</label>
+			<div class="col-xs-8">
+				<select ng-model="measurement.sensor" ng-options="sensor for sensor in sensors" class="form-control"></select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-4 control-label">Name</label>
+			<div class="col-xs-8">
+				<input type="text" ng-model="measurement.name" class="form-control" placeholder="Name"/>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-default submit-button" ng-click="submit(measurement)">Submit</button>
+		<div ng-if="measurementSend">Measurement send!</div>
+
+	</form>
+
+</div>

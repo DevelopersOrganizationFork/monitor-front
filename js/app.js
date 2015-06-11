@@ -25,6 +25,10 @@ app.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: 'templates/measurementsList.html',
 			controller: 'measurementsListController'
 		})
+		.when('/measurements-complex', {
+			templateUrl: 'templates/measurements-complex.html',
+			controller: 'measurementsComplexController'
+		})
 		.when('/home', {
 			templateUrl: 'templates/home.html',
 			controller: 'homeController'
